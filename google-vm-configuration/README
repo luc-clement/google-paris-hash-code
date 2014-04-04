@@ -1,0 +1,11 @@
+To configure the google VM :
+
+1. run the install.sh script
+2. copy the following lines at the end of the .bashrc :
+
+JAVA_HOME=/usr/lib/jvm/java-7-oracle
+M2_HOME=/usr/local/apache-maven-3.2.1
+M2=$M2_HOME/bin
+PATH=$M2:$PATH
+
+enjoy your Google VM

@@ -27,6 +27,14 @@ public class Surface {
 				TrialRound.isDrawn[x+i][y+j] = true;
 	}
 	
+	public boolean isDrawn() {
+		for (int i=0; i<width; ++i)
+			for (int j=0; j<width; j++)
+				if (TrialRound.isDrawn[x+i][y+j] == false)
+					return false;
+		return true;
+	}
+	
 	public int getX() {
 		return x;
 	}

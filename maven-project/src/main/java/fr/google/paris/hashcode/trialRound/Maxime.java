@@ -1,4 +1,4 @@
-package fr.google.paris.hashcode;
+package fr.google.paris.hashcode.trialRound;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +33,8 @@ public class Maxime {
 				else TrialRound.map[i][j]=true;
 			}
 		}
+		
+		scanner.close();
 
 	}
 	

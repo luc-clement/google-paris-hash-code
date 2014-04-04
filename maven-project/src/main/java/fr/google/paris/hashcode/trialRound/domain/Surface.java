@@ -1,6 +1,6 @@
-package fr.google.paris.hashcode.domain;
+package fr.google.paris.hashcode.trialRound.domain;
 
-import fr.google.paris.hashcode.TrialRound;
+import fr.google.paris.hashcode.trialRound.TrialRound;
 
 
 public class Surface {

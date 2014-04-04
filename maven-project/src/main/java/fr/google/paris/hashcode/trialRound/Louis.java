@@ -1,4 +1,4 @@
-package fr.google.paris.hashcode;
+package fr.google.paris.hashcode.trialRound;
 
 import java.util.ArrayList;
 import java.util.List;

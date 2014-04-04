@@ -1,10 +1,8 @@
-package fr.google.paris.hashcode;
+package fr.google.paris.hashcode.trialRound;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-
-import fr.google.paris.hashcode.domain.Surface;
 
 public class TrialRound {
 	

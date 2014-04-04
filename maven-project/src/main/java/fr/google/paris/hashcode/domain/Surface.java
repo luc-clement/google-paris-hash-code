@@ -1,11 +1,32 @@
 package fr.google.paris.hashcode.domain;
 
+import fr.google.paris.hashcode.TrialRound;
+
+
 public class Surface {
 
 	private int x;
 	private int y;
 	private int width;
-	private int height;
+	
+	
+	public double tauxRemplissage() {
+		int numberOfPaintedCases = 0;
+		
+		for (int i=0; i<width; ++i)
+			for (int j=0; j<width; j++)
+				if (TrialRound.map[x+i][y+j] == true)
+					++numberOfPaintedCases;
+		
+		return ((double) numberOfPaintedCases) / ((double) (width*width));
+	}
+	
+	public void Draw () {
+		for (int i=0; i<width; ++i)
+			for (int j=0; j<width; j++)
+				TrialRound.isDrawn[x+i][y+j] = true;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -24,23 +45,13 @@ public class Surface {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	public int getHeight() {
-		return height;
+	public Surface() {
+		super();
 	}
-	public void setHeight(int height) {
-		this.height = height;
-	}
-	public Surface(int x, int y, int width, int height) {
+	public Surface(int x, int y, int width) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
-		this.height = height;
 	}
-	public Surface() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 }

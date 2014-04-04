@@ -1,18 +1,22 @@
 package fr.google.paris.hashcode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.google.paris.hashcode.domain.Surface;
 
 public class Alexis {
 	
-	public static ArrayList<String> definePaintOrders(int s){
+	public static List<String> definePaintOrdersOfSize(int s){
 		Surface S;
 		int x, y, xBest, yBest;
 		double t, tBest;
-		ArrayList<String> orders = new ArrayList<String>();
+		List<String> orders = new ArrayList<String>();
 		x = 0;
 		y = 0;
+		t = 0;
+		xBest = 0;
+		yBest = 0;
 		tBest = 0;
 		boolean go = true;
 		while(go){
@@ -37,6 +41,13 @@ public class Alexis {
 				go = true;
 			}
 		}
+		return orders;
+	}
+	
+	public static List<String> definePaintOrders(int sMax){
+		List<String> orders = new ArrayList<String>();
+		for(int s = sMax; s >= 0; --s)
+			orders.addAll(definePaintOrdersOfSize(s));
 		return orders;
 	}
 }

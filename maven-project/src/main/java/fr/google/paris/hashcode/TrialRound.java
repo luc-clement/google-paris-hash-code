@@ -10,7 +10,7 @@ public class TrialRound {
 	
 	public static boolean[][] map;
 	public static boolean[][] isDrawn;
-	public static double tauxDeRemplissage;
+	public static double tauxDeRemplissage = 0.7;
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		

@@ -46,8 +46,10 @@ public class Alexis {
 	
 	public static List<String> definePaintOrders(int sMax){
 		List<String> orders = new ArrayList<String>();
-		for(int s = sMax; s >= 0; --s)
+		for(int s = sMax; s >= 0; --s) {
 			orders.addAll(definePaintOrdersOfSize(s));
+			System.out.println(s);
+		}
 		return orders;
 	}
 }

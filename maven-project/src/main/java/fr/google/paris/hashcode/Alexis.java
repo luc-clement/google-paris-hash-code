@@ -25,7 +25,7 @@ public class Alexis {
 				for(y = 2*s; y < TrialRound.map[0].length - (2*s+1); ++y){
 					S = new Surface(x,y,2*s+1);
 					t = S.tauxRemplissage();
-					if(t > TrialRound.tauxDeRemplissage && t > tBest && t < 1){
+					if(t > TrialRound.tauxDeRemplissage && t > tBest && !S.isDrawn()){
 						xBest = x;
 						yBest = y;
 						tBest = t;

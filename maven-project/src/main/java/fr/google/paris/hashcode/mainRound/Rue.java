@@ -7,14 +7,14 @@ public class Rue {
 	private final static Logger LOGGER = Logger.getLogger(Rue.class);
 
 	int departId;
-	int arriveId;
+	int arriveeId;
 	int tempsParcours;
 	int longueur;
 	
 	
-	public Rue(int departId, int arriveId, int tempsParcours, int longueur) {
+	public Rue(int departId, int arriveeId, int tempsParcours, int longueur) {
 		this.departId = departId;
-		this.arriveId = arriveId;
+		this.arriveeId = arriveeId;
 		this.tempsParcours = tempsParcours;
 		this.longueur = longueur;
 	}

@@ -96,6 +96,7 @@ public class Vehicule {
 		while (canStillMove()) {
 			int bestNextIntersection = bestNextIntersection();
 			if (bestNextIntersection != -1) {
+				tempsRestant -= intersectionsVisitees.get(intersectionsVisitees.size()-1).intersectionsJoignables.get(bestNextIntersection).tempsParcours;
 				intersectionsVisitees.add(MainRound.Intersections.get(bestNextIntersection));
 				intersectionsVisitees.get(intersectionsVisitees.size() - 2).rueParcourue(bestNextIntersection);
 			} else {
@@ -109,7 +110,7 @@ public class Vehicule {
 		Intersection positionActuelle = intersectionsVisitees.get(intersectionsVisitees.size()-1);
 		
 		int result = -1;
-		Double bestRatio = 15.;
+		Double bestRatio = 150000.;
 		
 		for (int i : positionActuelle.intersectionsJoignables.keySet()) {
 			if (positionActuelle.intersectionsJoignables.get(i).tempsParcours <= tempsRestant) {

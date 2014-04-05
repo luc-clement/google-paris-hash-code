@@ -26,5 +26,17 @@ public class Intersection {
 			intersectionsJoignables.put(intersectionId, rue);
 		}
 	}
+	
+	/**
+	 * Si il est possible d'aller de cette intersection à l'intersection d'identifiant arriveeId, mettre à 0 la longueur de ce trajet
+	 * @param arriveeId l'identifiant de l'arrivée
+	 */
+	public void rueParcourue(int arriveeId) {
+		if (!intersectionsJoignables.containsKey(arriveeId)) {
+			LOGGER.info("On ne peut aller de cette rue (" +id+ ") vers la rue " + arriveeId);
+		} else {
+			intersectionsJoignables.get(arriveeId).supprimerScore();
+		}
+	}
 
 }

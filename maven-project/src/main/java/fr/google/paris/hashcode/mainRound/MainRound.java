@@ -45,5 +45,17 @@ public class MainRound {
 
 		
 	}
+	
+	/**
+	 * Met à 0 la longueur de toutes les rues traversées par un parcours (dans les deux sens)
+	 * 
+	 * @param parcours La liste des identifiants des intersections parcourues, dans l'ordre
+	 */
+	public void supprimerScoreParcours(List<Integer> parcours) {
+		for (int i=0; i<parcours.size()-1; ++i) {
+			Intersections.get(i).rueParcourue(i+1);
+			Intersections.get(i+1).rueParcourue(i);
+		}
+	}
 
 }

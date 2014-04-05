@@ -19,6 +19,8 @@ public class Rue {
 		this.longueur = longueur;
 	}
 	
-	
+	public void supprimerScore() {
+		this.longueur = 0;
+	}
 	
 }

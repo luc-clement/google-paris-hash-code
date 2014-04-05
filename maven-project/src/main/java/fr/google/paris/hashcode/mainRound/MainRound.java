@@ -13,7 +13,7 @@ public class MainRound {
 	public static int initialPosition;
 	
 	public static HashMap<Integer, Intersection> Intersections = new HashMap<Integer, Intersection>();
-	public List<Vehicule> vehicules = new ArrayList<Vehicule>();
+	public static List<Vehicule> vehicules = new ArrayList<Vehicule>();
 	
 	
 	public static void main(String[] args) {

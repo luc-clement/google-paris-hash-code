@@ -74,6 +74,7 @@ public class InputOutput {
 		
 		for(Vehicule vehiculeLu : MainRound.vehicules) {
 			List<Integer> itineraireLu= vehiculeLu.getItineraire();
+			fw.write(itineraireLu.size());
 			for(int intersectionLue: itineraireLu) {
 				fw.write(intersectionLue);
 			}

@@ -1,12 +1,15 @@
 package fr.google.paris.hashcode.mainRound;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
+
+import fr.google.paris.hashcode.trialRound.TrialRound;
 
 public class InputOutput {
 	
@@ -62,40 +65,24 @@ public class InputOutput {
 
 	}
 	
-	public static void outputTest(String destinationPath) throws IOException, FileNotFoundException {
-		//Ecriture dans le fichier
-		File f = new File(destinationPath);
-//		FileWriter fw = new FileWriter(f);
-//		
-//		FileInputStream fis = new FileInputStream(new File(destinationPath));
-//		
-		PrintWriter out = new java.io.PrintWriter(f);
-		
-		int i = 5;
-		String s = "bonjour";
-		out.println(i);
-		out.println(s);
-//		fw.write(i);
-//		fw.write(s);
-	}
-	
 	public static void output(String destinationPath) throws IOException, FileNotFoundException {
 		
 		//Ecriture dans le fichier
-		File f = new File(destinationPath);
-		FileWriter fw = new FileWriter(f);
-		
-		fw.write(MainRound.nbVehicules);
+		FileWriter fw = new FileWriter(destinationPath, true);
+		BufferedWriter output = new BufferedWriter(fw);
+		output.write(MainRound.nbVehicules);
+		output.flush();
 		
 		for(Vehicule vehiculeLu : MainRound.vehicules) {
 			List<Integer> itineraireLu= vehiculeLu.getItineraireFinal();
-			fw.write(itineraireLu.size());
+			output.write(itineraireLu.size());
+			output.flush();
 			for(int intersectionLue: itineraireLu) {
-				fw.write(intersectionLue);
+				output.write(intersectionLue);
+				output.flush();
 			}
 		}
-            
-		fw.close();
+        output.close();
 	}
 
 }

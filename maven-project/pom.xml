@@ -31,7 +31,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>fr.google.paris.hashcode.Hello</mainClass>
+					<mainClass>fr.google.paris.hashcode.mainRound.MainRound</mainClass>
 					<!--<arguments> <argument>foo</argument> <argument>bar</argument> </arguments> -->
 				</configuration>
 			</plugin>

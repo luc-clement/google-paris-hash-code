@@ -30,26 +30,30 @@ public class Vehicule {
 	
 	// depart excluded from path
 	public List<Integer> getBestSubItineraire(int departID, int remainingMoves, int remainingTime){
-		List<Integer> path = new ArrayList<Integer>();
+		List<Integer> bestItineraire = new ArrayList<Integer>();
 		if(remainingMoves == 0 || remainingTime <= 0)
-			return path;
+			return bestItineraire;
 		
 		Intersection depart = MainRound.Intersections.get(departID);
 		HashMap<Integer,List<Integer>> itineraires = new HashMap<Integer,List<Integer>>();
 		
-		int nouveauTempsRestant;
 		for(int i : depart.intersectionsJoignables.keySet()){
-			
-			// init scores & itineraires de i
 			itineraires.put(i, new ArrayList<Integer>());
 			itineraires.get(i).add(i);
 			itineraires.get(i).addAll(getBestSubItineraire(i,remainingMoves-1,remainingTime - depart.intersectionsJoignables.get(i).tempsParcours));
 		}
-		double bestRatio = 0;
-		List<Integer> bestItineraire = new ArrayList<Integer>();
-		// TODO
 		
-		return path;
+		double bestRatio = 0;
+		double currentRatio = 0;
+		// TODO calcul bestRatio en prenant en compte le depart !
+		for(int i : itineraires.keySet()){
+			currentRatio = ratioItineraire(itineraires.get(i));
+			if(currentRatio >= bestRatio){
+				bestItineraire = itineraires.get(i);
+				bestRatio = currentRatio;
+			}
+		}
+		return bestItineraire;
 	}
 	
 	public List<Integer> getItineraire(){

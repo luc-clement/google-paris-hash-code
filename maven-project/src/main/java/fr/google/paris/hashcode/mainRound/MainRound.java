@@ -33,9 +33,9 @@ public class MainRound {
 
 		for (Vehicule vehicule : vehicules) {
 			LOGGER.info("NEXT VEHICULE");
-//			vehicule.getItineraire();
+			vehicule.getItineraire();
 //			supprimerScoreParcours(vehicule.getItineraireFinal());
-			vehicule.defineItineraire();
+		//	vehicule.defineItineraire();
 		}
 		
 		InputOutput.outputTest("/home/volodia/test.txt");
@@ -51,8 +51,8 @@ public class MainRound {
 	 */
 	public static void supprimerScoreParcours(List<Integer> parcours) {
 		for (int i=0; i<parcours.size()-1; ++i) {
-			Intersections.get(i).rueParcourue(i+1);
-			Intersections.get(i+1).rueParcourue(i);
+			Intersections.get(parcours.get(i)).rueParcourue(parcours.get(i+1));
+			Intersections.get(parcours.get(i+1)).rueParcourue(parcours.get(i));
 		}
 	}
 	

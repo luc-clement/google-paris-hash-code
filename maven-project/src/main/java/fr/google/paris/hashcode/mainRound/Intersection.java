@@ -33,7 +33,7 @@ public class Intersection {
 	 */
 	public void rueParcourue(int arriveeId) {
 		if (!intersectionsJoignables.containsKey(arriveeId)) {
-			LOGGER.info("On ne peut aller de cette rue (" +id+ ") vers la rue " + arriveeId);
+			//LOGGER.info("On ne peut aller de cette rue (" +id+ ") vers la rue " + arriveeId);
 		} else {
 			intersectionsJoignables.get(arriveeId).supprimerScore();
 		}

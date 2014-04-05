@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
-
-import fr.google.paris.hashcode.trialRound.TrialRound;
 
 public class InputOutput {
 	
@@ -62,6 +60,23 @@ public class InputOutput {
 		}		
 		scanner.close();
 
+	}
+	
+	public static void outputTest(String destinationPath) throws IOException, FileNotFoundException {
+		//Ecriture dans le fichier
+		File f = new File(destinationPath);
+//		FileWriter fw = new FileWriter(f);
+//		
+//		FileInputStream fis = new FileInputStream(new File(destinationPath));
+//		
+		PrintWriter out = new java.io.PrintWriter(f);
+		
+		int i = 5;
+		String s = "bonjour";
+		out.println(i);
+		out.println(s);
+//		fw.write(i);
+//		fw.write(s);
 	}
 	
 	public static void output(String destinationPath) throws IOException, FileNotFoundException {

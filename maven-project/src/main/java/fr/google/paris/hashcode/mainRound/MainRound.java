@@ -32,10 +32,12 @@ public class MainRound {
 
 
 		for (Vehicule vehicule : vehicules) {
-			vehicule.getItineraire();
-			supprimerScoreParcours(vehicule.getItineraireFinal());
+//			vehicule.getItineraire();
+//			supprimerScoreParcours(vehicule.getItineraireFinal());
+			vehicule.defineItineraire();
 		}
 		
+		InputOutput.outputTest("/home/volodia/test.txt");
 		
 		InputOutput.output("/home/volodia/paris_54000_solution.txt");
 		

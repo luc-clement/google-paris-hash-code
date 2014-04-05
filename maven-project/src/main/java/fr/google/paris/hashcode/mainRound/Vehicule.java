@@ -29,6 +29,13 @@ public class Vehicule {
 	}
 	
 	public List<Integer> getItineraireFinal() {
+		if (itineraireFinal != null)
+			return itineraireFinal;
+		
+		itineraireFinal = new ArrayList<Integer>();
+		for (Intersection intersection : intersectionsVisitees) {
+			itineraireFinal.add(intersection.id);
+		}
 		return itineraireFinal;
 	}
 	
@@ -77,5 +84,53 @@ public class Vehicule {
 			lastIntersection = i;
 		}
 		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void defineItineraire() {
+		while (canStillMove()) {
+			int bestNextIntersection = bestNextIntersection();
+			if (bestNextIntersection != -1) {
+				intersectionsVisitees.add(MainRound.Intersections.get(bestNextIntersection));
+				intersectionsVisitees.get(intersectionsVisitees.size() - 2).rueParcourue(bestNextIntersection);
+			} else {
+				LOGGER.info("Can't move anymore.");
+				break;
+			}
+		}
+	}
+	
+	public int bestNextIntersection() {
+		Intersection positionActuelle = intersectionsVisitees.get(intersectionsVisitees.size()-1);
+		
+		int result = -1;
+		Double bestRatio = 15.;
+		
+		for (int i : positionActuelle.intersectionsJoignables.keySet()) {
+			if (positionActuelle.intersectionsJoignables.get(i).tempsParcours <= tempsRestant) {
+				Double ratio = ((double) positionActuelle.intersectionsJoignables.get(i).tempsParcours) / ((double) positionActuelle.intersectionsJoignables.get(i).longueur);
+				if (ratio <= bestRatio) {
+					result = i;
+					bestRatio = ratio;
+				}
+			}
+		}
+
+		return result;
+
+	}
+	
+	public boolean canStillMove() {
+		Intersection positionActuelle = intersectionsVisitees.get(intersectionsVisitees.size()-1);
+		for (int i : positionActuelle.intersectionsJoignables.keySet()) {
+			if (positionActuelle.intersectionsJoignables.get(i).tempsParcours <= tempsRestant)
+				return true;
+		}
+		return false;
 	}
 }

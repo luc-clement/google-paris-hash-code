@@ -13,8 +13,6 @@ public class Vehicule {
 	
 	int tempsRestant;
 	
-	public HashMap<Integer, Intersection> intersectionsPossibles;
-	
 	List<Intersection> intersectionsVisitees = new ArrayList<Intersection>();
 	
 	public Vehicule (int tempsInitial, Intersection positionInitiale ) {
@@ -23,49 +21,51 @@ public class Vehicule {
 	}
 	
 	public List<Integer> getItineraire(){
-		List<Integer> it = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant);
+		List<Integer> it = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant,null);
 		return it;
 	}
 	
-	public List<Integer> getSubItineraire(int intersection, int temps){
-		intersectionsPossibles = MainRound.Intersections;
+	public List<Integer> getSubItineraire(int departID, int tempsRestant, List<Integer> intersectionsExclues){ // depart must be in IntersectionsVisitees ?
+		Intersection depart = MainRound.Intersections.get(departID);
+		HashMap<Integer,Integer> scores = new HashMap<Integer,Integer>();
+		HashMap<Integer,List<Integer>> itineraires = new HashMap<Integer,List<Integer>>();
 		
-		List<Integer> itineraire = new ArrayList<Integer>();
-		//itineraire.add(intersection);
-		
-		// terminaison : on n'a plus le temps
-		
-		
-		
-		Set<Integer> intersectionsJoignables = intersectionsPossibles.get(intersection).intersectionsJoignables.keySet();
-		HashMap<Integer,List<Integer>> subItineraires = new HashMap<Integer,List<Integer>>();
-		HashMap<Integer,Integer> subScores = new HashMap<Integer,Integer>();
-		List<Integer> currentSubItineraire;
-		Integer currentSubScore;
-		for(Integer i : intersectionsJoignables){
-			currentSubItineraire = new ArrayList<Integer>();
-			currentSubItineraire.add(intersection);
-			currentSubItineraire.addAll(getSubItineraire(i));
+		List<Integer> currentItineraire;
+		List<Integer> currentIntersectionsExclues;
+		int nouveauTempsRestant;
+		for(int i : depart.intersectionsJoignables.keySet()){
+			
+			// init scores & itineraires de i
+			scores.put(i, 0);
+			itineraires.put(i, new ArrayList<Integer>());
+			itineraires.get(i).add(i);
+			
+			nouveauTempsRestant = tempsRestant - depart.intersectionsJoignables.get(i).tempsParcours;
+			if(!intersectionsExclues.contains(i) && nouveauTempsRestant >= 0){
+				currentIntersectionsExclues = new ArrayList<Integer>();
+				currentIntersectionsExclues.add(departID);
+				currentIntersectionsExclues.add(i);
+				currentIntersectionsExclues.addAll(intersectionsExclues);
+				currentItineraire = getSubItineraire(i,nouveauTempsRestant,currentIntersectionsExclues);
+				itineraires.get(i).addAll(currentItineraire);
+				scores.put(i,calculateScore(itineraires.get(i)));
+			}
 		}
-		return itineraire;
-	}
-	
-	public int getScore(List<Integer> itineraire){
-		int result = 0;
-		int lastIntersection = itineraire.get(0);
-		for(int i : itineraire) if(i != 0){
-			result += intersectionsPossibles.get(lastIntersection).intersectionsJoignables.get(i).longueur;
-			lastIntersection = i;
+		int bestScore = 0;
+		List<Integer> bestItineraire = null;
+		for(int i : scores.keySet()){
+			if(scores.get(i) > bestScore)
+				bestItineraire = itineraires.get(i);
 		}
-		return result;
+		return bestItineraire;
 	}
 	
 	public int calculateScore(List<Integer> itineraire){ // & update intersectionsPossibles
 		int lastIntersection = itineraire.get(0);
 		int result = 0;
 		for(int i : itineraire) if(i != 0){
-			result += intersectionsPossibles.get(lastIntersection).intersectionsJoignables.get(i).longueur;
-			intersectionsPossibles.get(lastIntersection).intersectionsJoignables.get(i).longueur = 0;
+			result += MainRound.Intersections.get(lastIntersection).intersectionsJoignables.get(i).longueur;
+			MainRound.Intersections.get(lastIntersection).intersectionsJoignables.get(i).longueur = 0;
 			lastIntersection = i;
 		}
 		return result;

@@ -15,17 +15,25 @@ public class Vehicule {
 	
 	List<Intersection> intersectionsVisitees = new ArrayList<Intersection>();
 	
+	List<Integer> itineraireFinal;
+	
 	public Vehicule (int tempsInitial, Intersection positionInitiale ) {
 		this.tempsRestant = tempsInitial;
 		intersectionsVisitees.add(positionInitiale);
 	}
 	
 	public List<Integer> getItineraire(){
-		List<Integer> it = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant,null);
+		List<Integer> it = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant, new ArrayList<Integer>());
+		itineraireFinal = it;
 		return it;
 	}
 	
+	public List<Integer> getItineraireFinal() {
+		return itineraireFinal;
+	}
+	
 	public List<Integer> getSubItineraire(int departID, int tempsRestant, List<Integer> intersectionsExclues){ // depart must be in IntersectionsVisitees ?
+		LOGGER.info(departID);
 		Intersection depart = MainRound.Intersections.get(departID);
 		HashMap<Integer,Integer> scores = new HashMap<Integer,Integer>();
 		HashMap<Integer,List<Integer>> itineraires = new HashMap<Integer,List<Integer>>();
@@ -52,7 +60,7 @@ public class Vehicule {
 			}
 		}
 		int bestScore = 0;
-		List<Integer> bestItineraire = null;
+		List<Integer> bestItineraire = new ArrayList<Integer>();
 		for(int i : scores.keySet()){
 			if(scores.get(i) > bestScore)
 				bestItineraire = itineraires.get(i);

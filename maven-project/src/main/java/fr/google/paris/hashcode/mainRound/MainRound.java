@@ -26,11 +26,33 @@ public class MainRound {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// Configuration de Log4J
 		BasicConfigurator.configure();
-
-		/*
-		 * TESTS
-		 */
 		InputOutput.intput("/home/volodia/paris_54000.txt");
+
+		initialLogs();
+
+
+		
+		
+		InputOutput.output("/home/volodia/paris_54000_solution.txt");
+		
+	}
+	
+	/**
+	 * Met à 0 la longueur de toutes les rues traversées par un parcours (dans les deux sens)
+	 * 
+	 * @param parcours La liste des identifiants des intersections parcourues, dans l'ordre
+	 */
+	public static void supprimerScoreParcours(List<Integer> parcours) {
+		for (int i=0; i<parcours.size()-1; ++i) {
+			Intersections.get(i).rueParcourue(i+1);
+			Intersections.get(i+1).rueParcourue(i);
+		}
+	}
+	
+	/**
+	 * Print the initial informations
+	 */
+	public static void initialLogs() {
 		LOGGER.info("---------- INITIAL INFORMATIONS ----------");
 		LOGGER.info("nombre d'intersections : " + nbIntersections);
 		LOGGER.info("nombre de rues : " + nbRues);
@@ -40,22 +62,6 @@ public class MainRound {
 		
 		LOGGER.info("Taille de la liste vehicules : " + vehicules.size());
 		LOGGER.info("Taille de la HashMap Intersections : " + Intersections.size());
-		//LOGGER.info("Nombre d'intersections joignables depuis le départ : " + Intersections.get(initialPosition).intersectionsJoignables.size());
 		LOGGER.info("------------------------------------------");
-
-		
 	}
-	
-	/**
-	 * Met à 0 la longueur de toutes les rues traversées par un parcours (dans les deux sens)
-	 * 
-	 * @param parcours La liste des identifiants des intersections parcourues, dans l'ordre
-	 */
-	public void supprimerScoreParcours(List<Integer> parcours) {
-		for (int i=0; i<parcours.size()-1; ++i) {
-			Intersections.get(i).rueParcourue(i+1);
-			Intersections.get(i+1).rueParcourue(i);
-		}
-	}
-
 }

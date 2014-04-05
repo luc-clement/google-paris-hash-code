@@ -17,7 +17,7 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			
+
 			<!-- ALLOW TO RUN THE PROJECT WITH A SIMPLE 'mvn exec:java' command -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -32,10 +32,7 @@
 				</executions>
 				<configuration>
 					<mainClass>fr.google.paris.hashcode.Hello</mainClass>
-					<!--<arguments>
-						<argument>foo</argument>
-						<argument>bar</argument>
-					</arguments>-->
+					<!--<arguments> <argument>foo</argument> <argument>bar</argument> </arguments> -->
 				</configuration>
 			</plugin>
 
@@ -47,6 +44,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
 		</dependency>
 	</dependencies>
 

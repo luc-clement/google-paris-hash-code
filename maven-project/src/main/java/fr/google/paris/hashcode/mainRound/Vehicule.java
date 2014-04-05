@@ -23,9 +23,10 @@ public class Vehicule {
 	}
 	
 	public List<Integer> getItineraire(){
-		List<Integer> it = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant, new ArrayList<Integer>());
-		itineraireFinal = it;
-		return it;
+		List<Integer> intersectionsExclues = new ArrayList<Integer>();
+		intersectionsExclues.add(intersectionsVisitees.get(0).id);
+		itineraireFinal = getSubItineraire(intersectionsVisitees.get(0).id,tempsRestant, intersectionsExclues);
+		return itineraireFinal;
 	}
 	
 	public List<Integer> getItineraireFinal() {
@@ -51,7 +52,6 @@ public class Vehicule {
 			nouveauTempsRestant = tempsRestant - depart.intersectionsJoignables.get(i).tempsParcours;
 			if(!intersectionsExclues.contains(i) && nouveauTempsRestant >= 0){
 				currentIntersectionsExclues = new ArrayList<Integer>();
-				currentIntersectionsExclues.add(departID);
 				currentIntersectionsExclues.add(i);
 				currentIntersectionsExclues.addAll(intersectionsExclues);
 				currentItineraire = getSubItineraire(i,nouveauTempsRestant,currentIntersectionsExclues);
@@ -71,7 +71,7 @@ public class Vehicule {
 	public int calculateScore(List<Integer> itineraire){ // & update intersectionsPossibles
 		int lastIntersection = itineraire.get(0);
 		int result = 0;
-		for(int i : itineraire) if(i != 0){
+		for(int i : itineraire) if(i != lastIntersection){
 			result += MainRound.Intersections.get(lastIntersection).intersectionsJoignables.get(i).longueur;
 			MainRound.Intersections.get(lastIntersection).intersectionsJoignables.get(i).longueur = 0;
 			lastIntersection = i;

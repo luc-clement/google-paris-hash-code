@@ -37,7 +37,7 @@ public class MainRound {
 			vehicule.defineItineraire();
 		}
 		
-		//InputOutput.outputTest("/home/volodia/test.txt");
+		InputOutput.outputTest("/home/volodia/test.txt");
 		
 		InputOutput.output("/home/volodia/paris_54000_solution.txt");
 		

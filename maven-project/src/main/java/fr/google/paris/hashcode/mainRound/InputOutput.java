@@ -3,13 +3,11 @@ package fr.google.paris.hashcode.mainRound;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
-
-import fr.google.paris.hashcode.trialRound.TrialRound;
 
 public class InputOutput {
 	
@@ -67,22 +65,54 @@ public class InputOutput {
 	
 	public static void output(String destinationPath) throws IOException, FileNotFoundException {
 		
-		//Ecriture dans le fichier
-		FileWriter fw = new FileWriter(destinationPath, true);
-		BufferedWriter output = new BufferedWriter(fw);
-		output.write(MainRound.nbVehicules);
-		output.flush();
-		
-		for(Vehicule vehiculeLu : MainRound.vehicules) {
-			List<Integer> itineraireLu= vehiculeLu.getItineraireFinal();
-			output.write(itineraireLu.size());
-			output.flush();
-			for(int intersectionLue: itineraireLu) {
-				output.write(intersectionLue);
-				output.flush();
+//		//Ecriture dans le fichier
+//		FileWriter fw = new FileWriter(destinationPath, true);
+//		BufferedWriter output = new BufferedWriter(fw);
+//		output.write(MainRound.nbVehicules);
+//		output.flush();
+//		
+//		for(Vehicule vehiculeLu : MainRound.vehicules) {
+//			List<Integer> itineraireLu= vehiculeLu.getItineraireFinal();
+//			output.write(itineraireLu.size());
+//			output.flush();
+//			for(int intersectionLue: itineraireLu) {
+//				output.write(intersectionLue);
+//				output.flush();
+//			}
+//		}
+//        output.close();
+//        
+        
+		try {
+		    File fileOut= new File(destinationPath); //Overture du fichier
+		    FileOutputStream fos = new FileOutputStream(fileOut);
+
+		    fos.write((Integer.toString(MainRound.nbVehicules)+"\n").getBytes());
+		    for(Vehicule vehiculeLu : MainRound.vehicules) {
+				List<Integer> itineraireLu= vehiculeLu.getItineraireFinal();
+				fos.write((Integer.toString(itineraireLu.size())+"\n").getBytes());
+				for(int intersectionLue: itineraireLu) {
+					fos.write((Integer.toString(intersectionLue)+"\n").getBytes());
+				}
 			}
+		    
+		    fos.close(); //Fermeture du fichier
+		} catch(Exception e) {
+		    e.printStackTrace();
 		}
-        output.close();
+	}
+	
+	public static void outputTest(String path) {
+		try {
+		    File fileOut= new File(path); //Overture du fichier
+		    FileOutputStream fos = new FileOutputStream(fileOut);
+		    String s = "bonjour";
+		    int i = 1;
+		    fos.write( s.getBytes() ); //On parse le contenu de la chaîne qu'on converti d'abord en variable de type byte
+		    fos.close(); //Fermeture du fichier
+		} catch(Exception e) {
+		    e.printStackTrace();
+		}
 	}
 
 }

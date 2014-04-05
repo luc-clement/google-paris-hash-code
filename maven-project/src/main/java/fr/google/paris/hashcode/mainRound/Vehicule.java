@@ -84,7 +84,7 @@ public class Vehicule {
 		List<Integer> currentSubItineraire;
 		if(tempsRestant > 0){
 			//LOGGER.info("temps restant : " + tempsRestant);
-			currentSubItineraire = getBestSubItineraire(itineraireFinal.get(itineraireFinal.size()-1), 14,tempsRestant);
+			currentSubItineraire = getBestSubItineraire(itineraireFinal.get(itineraireFinal.size()-1), 13,tempsRestant);
 			if (currentSubItineraire.isEmpty()) {
 				//LOGGER.info("empty subitineraire");
 				return false;

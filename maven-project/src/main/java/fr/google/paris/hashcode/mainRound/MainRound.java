@@ -31,7 +31,7 @@ public class MainRound {
 		
 		initialLogs();
 
-		/*boolean weHaveToContinue = true;
+		boolean weHaveToContinue = true;
 		HashMap<Vehicule, Boolean> getNext = new HashMap<Vehicule, Boolean>();
 		for (Vehicule vehicule : vehicules) {
 			getNext.put(vehicule, true);
@@ -46,16 +46,16 @@ public class MainRound {
 				//	vehicule.defineItineraire();
 			}
 			weHaveToContinue = getNext.containsValue(true) ? true : false;
-		}*/
+		}
 
 
 		/*
 		 * Solution non croisee
 		 */
-		for (Vehicule vehicule : vehicules) {
-			LOGGER.info("NEXT VEHICULE");
-			vehicule.getItineraire();
-		}
+//		for (Vehicule vehicule : vehicules) {
+//			LOGGER.info("NEXT VEHICULE");
+//			vehicule.getItineraire();
+//		}
 
 
 

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import fr.google.paris.hashcode.trialRound.TrialRound;
@@ -33,6 +34,12 @@ public class InputOutput {
 			double longitude = Double.parseDouble(ligneLueSplit[1]);
 			MainRound.Intersections.put(i, new Intersection(i, latitude, longitude));
 		}
+		
+		// Initialisation de la flotte :
+		for (int i=0; i<MainRound.nbVehicules; ++i) {
+			Vehicule vehicule = new Vehicule(MainRound.tempsVirtuel, MainRound.Intersections.get(MainRound.initialPosition));
+			MainRound.vehicules.add(vehicule);
+		}
 
 		// Lecture des rues
 		for (int j=0; j<MainRound.nbRues; ++j) {
@@ -52,24 +59,26 @@ public class InputOutput {
 				Rue rue2= new Rue(arriveeId, departId, tempsParcours, longueur);
 				MainRound.Intersections.get(arriveeId).addIntersectionJoignables(departId, rue2);
 			}
-		}
-		
-		
+		}		
 		scanner.close();
 
 	}
 	
-	public static void output(String destinationPath, List<String> paint, List<String> erase) throws IOException, FileNotFoundException {
-		int nbOperations = paint.size()+erase.size();
+	public static void output(String destinationPath) throws IOException, FileNotFoundException {
+		
+		//Ecriture dans le fichier
 		File f = new File(destinationPath);
 		FileWriter fw = new FileWriter(f);
-		fw.write(nbOperations);
-		for(String s : paint) {
-			fw.write(s);
+		
+		fw.write(MainRound.nbVehicules);
+		
+		for(Vehicule vehiculeLu : MainRound.vehicules) {
+			List<Integer> itineraireLu= vehiculeLu.getItineraire();
+			for(int intersectionLue: itineraireLu) {
+				fw.write(intersectionLue);
+			}
 		}
-		for(String s : erase) {
-			fw.write(s);
-		}
+            
 		fw.close();
 	}
 

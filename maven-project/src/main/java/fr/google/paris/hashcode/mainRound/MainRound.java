@@ -26,11 +26,12 @@ public class MainRound {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// Configuration de Log4J
 		BasicConfigurator.configure();
-		InputOutput.intput("/home/volodia/paris_54000.txt");
-
+		//InputOutput.intput("/home/volodia/paris_54000.txt");
+		InputOutput.intput("/Users/alexisterrat/paris_54000.txt");
+		
 		initialLogs();
 
-		boolean weHaveToContinue = true;
+		/*boolean weHaveToContinue = true;
 		HashMap<Vehicule, Boolean> getNext = new HashMap<Vehicule, Boolean>();
 		for (Vehicule vehicule : vehicules) {
 			getNext.put(vehicule, true);
@@ -45,25 +46,26 @@ public class MainRound {
 				//	vehicule.defineItineraire();
 			}
 			weHaveToContinue = getNext.containsValue(true) ? true : false;
-		}
+		}*/
 
 
 		/*
-		 * Solution non croisée
+		 * Solution non croisee
 		 */
-//		for (Vehicule vehicule : vehicules) {
-//			LOGGER.info("NEXT VEHICULE");
-//			vehicule.getItineraire();
-//		}
+		for (Vehicule vehicule : vehicules) {
+			LOGGER.info("NEXT VEHICULE");
+			vehicule.getItineraire();
+		}
 
 
 
-		InputOutput.output("/home/volodia/paris_54000_solution.txt");
+		//InputOutput.output("/home/volodia/paris_54000_solution.txt");
+		InputOutput.output("/Users/alexisterrat/paris_54000_solution.txt");
 
 	}
 
 	/**
-	 * Met à 0 la longueur de toutes les rues traversées par un parcours (dans les deux sens)
+	 * Met a 0 la longueur de toutes les rues traversees par un parcours (dans les deux sens)
 	 * 
 	 * @param parcours La liste des identifiants des intersections parcourues, dans l'ordre
 	 */
@@ -82,7 +84,7 @@ public class MainRound {
 		LOGGER.info("nombre d'intersections : " + nbIntersections);
 		LOGGER.info("nombre de rues : " + nbRues);
 		LOGGER.info("temps virtuel disponible : " + tempsVirtuel);
-		LOGGER.info("nombre de véhicules : " + nbVehicules);
+		LOGGER.info("nombre de vehicules : " + nbVehicules);
 		LOGGER.info("position initiale : " + initialPosition);
 
 		LOGGER.info("Taille de la liste vehicules : " + vehicules.size());

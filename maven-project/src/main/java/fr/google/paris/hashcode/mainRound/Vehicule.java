@@ -50,17 +50,16 @@ public class Vehicule {
 		int currentLongueur = 0;
 		// TODO calcul bestRatio en prenant en compte le depart !
 		for(int i : itineraires.keySet()){
-			//			currentRatio = ratioItineraire(itineraires.get(i));
-			currentLongueur = longueurParcours(departID, itineraires.get(i));
-//			LOGGER.info(itineraires.get(i).size());
-//			if(currentRatio >= bestRatio){
-//				bestItineraire = itineraires.get(i);
-//				bestRatio = currentRatio;
-//			}
-			if (currentLongueur >= bestLongueur) {
+			currentRatio = ratioItineraire(departID,itineraires.get(i));
+			if(currentRatio >= bestRatio){
+				bestItineraire = itineraires.get(i);
+				bestRatio = currentRatio;
+			}
+			//currentLongueur = longueurParcours(departID, itineraires.get(i));
+			/*if (currentLongueur >= bestLongueur) {
 				bestLongueur = currentLongueur;
 				bestItineraire = itineraires.get(i);
-			}
+			}*/
 		}
 		return bestItineraire;
 	}
@@ -69,7 +68,7 @@ public class Vehicule {
 		List<Integer> currentSubItineraire;
 		while(tempsRestant > 0){
 			//LOGGER.info("temps restant : " + tempsRestant);
-			currentSubItineraire = getBestSubItineraire(itineraireFinal.get(itineraireFinal.size()-1), 15,tempsRestant);
+			currentSubItineraire = getBestSubItineraire(itineraireFinal.get(itineraireFinal.size()-1), 11,tempsRestant);
 			if (currentSubItineraire.isEmpty()) {
 				//LOGGER.info("empty subitineraire");
 				break;
@@ -155,20 +154,25 @@ public class Vehicule {
 	}
 
 	// Longueur / tempsParcours
-	public Double ratioItineraire(List<Integer> itineraire) {
+	public Double ratioItineraire(int departID, List<Integer> itineraire) {
 		Double tempsParcours = 0.;
 		Double distanceParcours = 0.;
-
+		if(itineraire.isEmpty())
+			return 0.;
+		
 		List<Point> ruesVisitees = new ArrayList<Point>();
-
+		distanceParcours += MainRound.Intersections.get(departID).intersectionsJoignables.get(itineraire.get(0)).longueur;
+		tempsParcours += MainRound.Intersections.get(departID).intersectionsJoignables.get(itineraire.get(0)).tempsParcours;
+		ruesVisitees.add(new Point(departID, itineraire.get(0)));
+		ruesVisitees.add(new Point(itineraire.get(0), departID));
+		
 		for (int i=0; i<itineraire.size()-1; ++i) {
-			if (!ruesVisitees.contains(new Point(i, i+1)))
-				distanceParcours += MainRound.Intersections.get(i).intersectionsJoignables.get(i+1).longueur;
+			if (!ruesVisitees.contains(new Point(itineraire.get(i), itineraire.get(i+1))))
+				distanceParcours += MainRound.Intersections.get(itineraire.get(i)).intersectionsJoignables.get(itineraire.get(i+1)).longueur;
 
-			tempsParcours += MainRound.Intersections.get(i).intersectionsJoignables.get(i+1).tempsParcours;
-
-			ruesVisitees.add(new Point(i, i+1));
-			ruesVisitees.add(new Point(i+1, i));
+			tempsParcours += MainRound.Intersections.get(itineraire.get(i)).intersectionsJoignables.get(itineraire.get(i+1)).tempsParcours;
+			ruesVisitees.add(new Point(itineraire.get(i), itineraire.get(i+1)));
+			ruesVisitees.add(new Point(itineraire.get(i+1), itineraire.get(i)));
 		}
 
 		return (distanceParcours / tempsParcours);

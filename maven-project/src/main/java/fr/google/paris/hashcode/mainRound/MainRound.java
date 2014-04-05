@@ -26,8 +26,8 @@ public class MainRound {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// Configuration de Log4J
 		BasicConfigurator.configure();
-		//InputOutput.intput("/home/volodia/paris_54000.txt");
-		InputOutput.intput("/Users/alexisterrat/paris_54000.txt");
+		InputOutput.intput("/home/volodia/paris_54000.txt");
+		//InputOutput.intput("/Users/alexisterrat/paris_54000.txt");
 		
 		initialLogs();
 
@@ -59,8 +59,8 @@ public class MainRound {
 
 
 
-		//InputOutput.output("/home/volodia/paris_54000_solution.txt");
-		InputOutput.output("/Users/alexisterrat/paris_54000_solution.txt");
+		InputOutput.output("/home/volodia/paris_54000_solution.txt");
+		//InputOutput.output("/Users/alexisterrat/paris_54000_solution.txt");
 
 	}
 

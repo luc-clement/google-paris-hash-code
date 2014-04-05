@@ -1,9 +1,9 @@
 package fr.google.paris.hashcode.mainRound;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -209,5 +209,26 @@ public class Vehicule {
 				return true;
 		}
 		return false;
+	}
+	
+	// Longueur / tempsParcours
+	public Double ratioItineraire(List<Integer> itineraire) {
+		Double tempsParcours = 0.;
+		Double distanceParcours = 0.;
+		
+		List<Point> ruesVisitees = new ArrayList<Point>();
+		
+		for (int i=0; i<itineraire.size()-1; ++i) {
+			if (!ruesVisitees.contains(new Point(i, i+1)))
+				distanceParcours += MainRound.Intersections.get(i).intersectionsJoignables.get(i+1).longueur;
+			
+			tempsParcours += MainRound.Intersections.get(i).intersectionsJoignables.get(i+1).tempsParcours;
+			
+			ruesVisitees.add(new Point(i, i+1));
+			ruesVisitees.add(new Point(i+1, i));
+}
+		
+		return (distanceParcours / tempsParcours);
+		
 	}
 }

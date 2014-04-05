@@ -32,9 +32,10 @@ public class MainRound {
 
 
 		for (Vehicule vehicule : vehicules) {
-//			vehicule.getItineraire();
-//			supprimerScoreParcours(vehicule.getItineraireFinal());
-			vehicule.defineItineraire();
+			LOGGER.info("NEXT VEHICULE");
+			vehicule.getItineraire();
+			supprimerScoreParcours(vehicule.getItineraireFinal());
+//			vehicule.defineItineraire();
 		}
 		
 		InputOutput.outputTest("/home/volodia/test.txt");

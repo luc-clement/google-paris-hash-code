@@ -41,7 +41,7 @@ public class Vehicule {
 	}
 	
 	public List<Integer> getSubItineraire(int departID, int tempsRestant, List<Integer> intersectionsExclues){ // depart must be in IntersectionsVisitees ?
-		LOGGER.info(departID);
+		//LOGGER.info(departID);
 		Intersection depart = MainRound.Intersections.get(departID);
 		HashMap<Integer,Integer> scores = new HashMap<Integer,Integer>();
 		HashMap<Integer,List<Integer>> itineraires = new HashMap<Integer,List<Integer>>();
@@ -62,7 +62,7 @@ public class Vehicule {
 				intersectionBest1 = i;
 			}
 		}
-		LOGGER.info("bestScore1 " + bestScore1);
+		//LOGGER.info("bestScore1 " + bestScore1);
 		
 		for(int i : depart.intersectionsJoignables.keySet()){
 			currentScore = depart.intersectionsJoignables.get(i).tempsParcours;
@@ -72,7 +72,7 @@ public class Vehicule {
 				intersectionBest2 = i;
 			}
 		}
-		LOGGER.info("bestScore2 " + bestScore2);
+		//LOGGER.info("bestScore2 " + bestScore2);
 		
 		if(intersectionBest1 != -1){
 			scores.put(intersectionBest1, 0);

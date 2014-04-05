@@ -33,9 +33,9 @@ public class MainRound {
 
 		for (Vehicule vehicule : vehicules) {
 			LOGGER.info("NEXT VEHICULE");
-			vehicule.getItineraire();
-			supprimerScoreParcours(vehicule.getItineraireFinal());
-//			vehicule.defineItineraire();
+//			vehicule.getItineraire();
+//			supprimerScoreParcours(vehicule.getItineraireFinal());
+			vehicule.defineItineraire();
 		}
 		
 		InputOutput.outputTest("/home/volodia/test.txt");

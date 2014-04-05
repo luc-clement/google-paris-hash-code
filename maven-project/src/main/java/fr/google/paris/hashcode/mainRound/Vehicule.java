@@ -188,10 +188,12 @@ public class Vehicule {
 		
 		for (int i : positionActuelle.intersectionsJoignables.keySet()) {
 			if (positionActuelle.intersectionsJoignables.get(i).tempsParcours <= tempsRestant) {
-				Double ratio = ((double) positionActuelle.intersectionsJoignables.get(i).tempsParcours) / ((double) positionActuelle.intersectionsJoignables.get(i).longueur);
+				Double ratio = ((double) positionActuelle.intersectionsJoignables.get(i).longueur) == 0 ? 149000. : ((double) positionActuelle.intersectionsJoignables.get(i).tempsParcours) / ((double) positionActuelle.intersectionsJoignables.get(i).longueur);
+				//LOGGER.info("ratio : " + ratio);
 				if (ratio <= bestRatio) {
 					result = i;
 					bestRatio = ratio;
+					//LOGGER.info("Ratio plus intéressant, on ajoute l'intersection");
 				}
 			}
 		}

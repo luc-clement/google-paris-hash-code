@@ -22,6 +22,36 @@ public class Vehicule {
 		intersectionsVisitees.add(positionInitiale);
 	}
 	
+	public List<Integer> moveTo(int nIntersectionsMax){
+		List<Integer> path = new ArrayList<Integer>();
+		
+		return path;
+	}
+	
+	// depart excluded from path
+	public List<Integer> getBestSubItineraire(int departID, int remainingMoves, int remainingTime){
+		List<Integer> path = new ArrayList<Integer>();
+		if(remainingMoves == 0 || remainingTime <= 0)
+			return path;
+		
+		Intersection depart = MainRound.Intersections.get(departID);
+		HashMap<Integer,List<Integer>> itineraires = new HashMap<Integer,List<Integer>>();
+		
+		int nouveauTempsRestant;
+		for(int i : depart.intersectionsJoignables.keySet()){
+			
+			// init scores & itineraires de i
+			itineraires.put(i, new ArrayList<Integer>());
+			itineraires.get(i).add(i);
+			itineraires.get(i).addAll(getBestSubItineraire(i,remainingMoves-1,remainingTime - depart.intersectionsJoignables.get(i).tempsParcours));
+		}
+		double bestRatio = 0;
+		List<Integer> bestItineraire = new ArrayList<Integer>();
+		// TODO
+		
+		return path;
+	}
+	
 	public List<Integer> getItineraire(){
 		List<Integer> intersectionsExclues = new ArrayList<Integer>();
 		intersectionsExclues.add(intersectionsVisitees.get(0).id);
@@ -193,7 +223,7 @@ public class Vehicule {
 				if (ratio <= bestRatio) {
 					result = i;
 					bestRatio = ratio;
-					//LOGGER.info("Ratio plus intéressant, on ajoute l'intersection");
+					//LOGGER.info("Ratio plus interessant, on ajoute l'intersection");
 				}
 			}
 		}

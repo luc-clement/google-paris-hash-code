@@ -47,7 +47,16 @@ public class MainRound {
 			weHaveToContinue = getNext.containsValue(true) ? true : false;
 		}
 
-		InputOutput.outputTest("/home/volodia/test.txt");
+
+		/*
+		 * Solution non croisée
+		 */
+//		for (Vehicule vehicule : vehicules) {
+//			LOGGER.info("NEXT VEHICULE");
+//			vehicule.getItineraire();
+//		}
+
+
 
 		InputOutput.output("/home/volodia/paris_54000_solution.txt");
 

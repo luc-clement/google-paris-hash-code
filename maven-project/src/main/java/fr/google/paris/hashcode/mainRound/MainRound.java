@@ -31,31 +31,34 @@ public class MainRound {
 		
 		initialLogs();
 
-		boolean weHaveToContinue = true;
-		HashMap<Vehicule, Boolean> getNext = new HashMap<Vehicule, Boolean>();
-		for (Vehicule vehicule : vehicules) {
-			getNext.put(vehicule, true);
-		}
-		while (weHaveToContinue) {
-			for (Vehicule vehicule : vehicules) {
-				//LOGGER.info("NEXT VEHICULE");
-				//			vehicule.getItineraire();
-				if (getNext.get(vehicule))
-					getNext.put(vehicule, vehicule.getNextPart());
-				//	supprimerScoreParcours(vehicule.getItineraireFinal());
-				//	vehicule.defineItineraire();
-			}
-			weHaveToContinue = getNext.containsValue(true) ? true : false;
-		}
+		/*
+		 * Solution algorithme récursif croisé (a priori moins performant)
+		 */
+//		boolean weHaveToContinue = true;
+//		HashMap<Vehicule, Boolean> getNext = new HashMap<Vehicule, Boolean>();
+//		for (Vehicule vehicule : vehicules) {
+//			getNext.put(vehicule, true);
+//		}
+//		while (weHaveToContinue) {
+//			for (Vehicule vehicule : vehicules) {
+//				//LOGGER.info("NEXT VEHICULE");
+//				//			vehicule.getItineraire();
+//				if (getNext.get(vehicule))
+//					getNext.put(vehicule, vehicule.getNextPart());
+//				//	supprimerScoreParcours(vehicule.getItineraireFinal());
+//				//	vehicule.defineItineraire();
+//			}
+//			weHaveToContinue = getNext.containsValue(true) ? true : false;
+//		}
 
 
 		/*
-		 * Solution non croisee
+		 * Solution algorithme récursif non croisee
 		 */
-//		for (Vehicule vehicule : vehicules) {
-//			LOGGER.info("NEXT VEHICULE");
-//			vehicule.getItineraire();
-//		}
+		for (Vehicule vehicule : vehicules) {
+			LOGGER.info("NEXT VEHICULE");
+			vehicule.getItineraire();
+		}
 
 
 

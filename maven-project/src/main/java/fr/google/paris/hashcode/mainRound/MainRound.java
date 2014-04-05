@@ -18,11 +18,11 @@ public class MainRound {
 	public static int tempsVirtuel;
 	public static int nbVehicules;
 	public static int initialPosition;
-	
+
 	public static HashMap<Integer, Intersection> Intersections = new HashMap<Integer, Intersection>();
 	public static List<Vehicule> vehicules = new ArrayList<Vehicule>();
-	
-	
+
+
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// Configuration de Log4J
 		BasicConfigurator.configure();
@@ -30,20 +30,29 @@ public class MainRound {
 
 		initialLogs();
 
-
+		boolean weHaveToContinue = true;
+		HashMap<Vehicule, Boolean> getNext = new HashMap<Vehicule, Boolean>();
 		for (Vehicule vehicule : vehicules) {
-			LOGGER.info("NEXT VEHICULE");
-			vehicule.getItineraire();
-//			supprimerScoreParcours(vehicule.getItineraireFinal());
-		//	vehicule.defineItineraire();
+			getNext.put(vehicule, true);
 		}
-		
+		while (weHaveToContinue) {
+			for (Vehicule vehicule : vehicules) {
+				//LOGGER.info("NEXT VEHICULE");
+				//			vehicule.getItineraire();
+				if (getNext.get(vehicule))
+					getNext.put(vehicule, vehicule.getNextPart());
+				//	supprimerScoreParcours(vehicule.getItineraireFinal());
+				//	vehicule.defineItineraire();
+			}
+			weHaveToContinue = getNext.containsValue(true) ? true : false;
+		}
+
 		InputOutput.outputTest("/home/volodia/test.txt");
-		
+
 		InputOutput.output("/home/volodia/paris_54000_solution.txt");
-		
+
 	}
-	
+
 	/**
 	 * Met à 0 la longueur de toutes les rues traversées par un parcours (dans les deux sens)
 	 * 
@@ -55,7 +64,7 @@ public class MainRound {
 			Intersections.get(parcours.get(i+1)).rueParcourue(parcours.get(i));
 		}
 	}
-	
+
 	/**
 	 * Print the initial informations
 	 */
@@ -66,7 +75,7 @@ public class MainRound {
 		LOGGER.info("temps virtuel disponible : " + tempsVirtuel);
 		LOGGER.info("nombre de véhicules : " + nbVehicules);
 		LOGGER.info("position initiale : " + initialPosition);
-		
+
 		LOGGER.info("Taille de la liste vehicules : " + vehicules.size());
 		LOGGER.info("Taille de la HashMap Intersections : " + Intersections.size());
 		LOGGER.info("------------------------------------------");

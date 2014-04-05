@@ -80,6 +80,23 @@ public class Vehicule {
 		}
 		return itineraireFinal;
 	}
+	
+	public boolean getNextPart() {
+		List<Integer> currentSubItineraire;
+		if(tempsRestant > 0){
+			//LOGGER.info("temps restant : " + tempsRestant);
+			currentSubItineraire = getBestSubItineraire(itineraireFinal.get(itineraireFinal.size()-1), 13,tempsRestant);
+			if (currentSubItineraire.isEmpty()) {
+				//LOGGER.info("empty subitineraire");
+				return false;
+			}
+			itineraireFinal.addAll(currentSubItineraire);
+			tempsRestant = MainRound.tempsVirtuel - tempsParcours(itineraireFinal);
+			MainRound.supprimerScoreParcours(itineraireFinal);
+			return true;
+		} else
+			return false;
+	}
 
 	public List<Integer> getItineraireFinal() {
 		if (itineraireFinal != null)

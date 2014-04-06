@@ -62,7 +62,6 @@ public class MainRound {
 
 
 		InputOutput.output("src/main/resources/paris_54000_solution.txt");
-		//InputOutput.output("/Users/alexisterrat/paris_54000_solution.txt");
 
 	}
 
